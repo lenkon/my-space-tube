@@ -9,15 +9,21 @@
       <div class="flex items-center w-full px-5 py-6 w-90 xl:px-12">
         <a class="text-3xl font-bold font-heading nav-title" href="/">
           <!-- <img class="h-9" src="logo.png" alt="logo"> -->
-          MY Space Tube
+          My Space Tube
         </a>
         <!-- Nav Links -->
         <ul class="hidden px-4 mx-auto space-x-12  md:flex font-heading">
           <li><a class="hover:text-gray-200" href="/">Home</a></li>
-          <%# <% if current_user %> 
+          <% if current_user %>
+            <%# <li><a class="hover:text-gray-200" href="#">  <%= link_to "My Media", pages_media_path %></a></li> %>
 
+            <%= button_to("Log Out", destroy_user_session_path, method: :delete) %></li>
+          <% else %>
+            <li><a class="hover:text-gray-200" href="#">  <%= link_to "Sign up", new_user_registration_path %></a></li>
+            <li><%= link_to "Login", new_user_session_path, class:"bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded shadow" %></a></li>
 
-            
+          <% end %>
+        </ul>
         <!-- Header Icons -->
       </div>
       <!-- Responsive navbar -->
