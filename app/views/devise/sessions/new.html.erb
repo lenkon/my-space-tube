@@ -1,7 +1,7 @@
 
 
-<div class="grid grid-cols-1 xl:grid-cols-2">
-<div class=" h-full w-full xl:px-32 px-4 mt-12 ">
+<div class="grid grid-cols-1 xl:grid-cols-2 overflow-x-scroll" >
+<div class=" h-full w-full xl:px-32 px-4 mt-12 " style="padding-bottom: 40px;">
     <h2 class="text-center text-5xl leading-relaxed text-gray-800">Welcome Back.</h2>
     <p class="text-md text-center"> Login in to download free photos and videos. </p>
             <%= render "devise/shared/links" %>
@@ -24,8 +24,8 @@
       <%= f.label :password, "Password", class: label_classes %>
       <%= f.password_field :password, autocomplete: "new-password", class: input_classes, required: true  %>
     </div>
-    By continuing you agree to our 
-    <%# <%= link_to "Terms of Use", pages_tos_path, style:"color: blue;" %> %>
+    <%# By continuing you agree to our  %>
+    <%# <%= link_to "Terms of Use", pages_tos_path, style:"color: blue;" %> 
       <%= f.submit "Login", class: "w-full bg-blue-500 hover:bg-blue-700 text-white mt-2 py-4 px-4 mr-6 rounded focus:outline-none focus:shadow-outline" %>
  
 
