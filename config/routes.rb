@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "posts#index"
+  get 'posts/:id/download', to: 'posts#download', as: 'download_post'
 end
