@@ -1,10 +1,134 @@
-<p style="color: green"><%= notice %></p>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-<%= render @post %>
+<div class="grid lg:grid-cols-2 grid-cols-1 mt-4 px-4">
+<div class="youtube-layout">
+  <% if @post.video.attached? %>
+    <div class="video-container">
+      <video controls>
+        <source src="<%= url_for(@post.video) %>" type="video/mp4">
+        
+        Your browser does not support the video tag.
+        
+      </video>
+      
+    </div>
+            <h2 class="text-1xl post-details">        Uploaded <%= time_ago_in_words(@post.created_at) %> ago</h2>
+  <% else %>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+    <% if @post.image.attached? %>
+      <%= image_tag(@post.image, class: "thumbnail") %>
+    <% end %>
+  <% end %>
 </div>
+
+  <div class="overlay xl:text-align:left;  ">
+    <div class="overlay-content">
+      <h2 class="text-3xl post-details"><%= @post.title %></h2>
+      <%# <h2 class="text-2xl post-details"><%= @post.hits %>
+
+
+
+
+      <p class="post-details">
+       <%# Posted by <%= @post.user.full_name %> 
+
+      </p>
+    </div>
+    <br>
+  <div class="button-container">
+    <% if @post.video.attached? || @post.image.attached? %>
+      <%= link_to 'Download', download_post_path(@post), class: " font-medium button-style" %>
+      
+    <% end %>
+    <% if current_user %>
+
+  
+      <%# <%if @post.user_id == current_user.id %> 
+
+      
+            <%= link_to image_tag("edit.svg", style:"height: 20px;"), edit_post_path(@post), class: " inline-block button-style edit-button" %>
+
+          <%= button_to image_tag("delete.svg", style:"height: 20px;"), post_path(@post), method: :delete, class: " font-medium button-style" %>
+
+      <%# <% end %> 
+    <% end %>
+  </div>
+
+</div>
+<style>
+
+  .youtube-layout {
+  width: 55%;
+  margin: 0 auto;
+  }
+
+  .thumbnail {
+   display: block;
+   max-width: 100%;
+   max-height: 100%;
+   width: auto;
+   height: auto;
+   margin: 0 auto;
+   object-fit: contain;
+  }
+
+  .post-details {
+  padding: 10px;
+  }
+
+  .post-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  }
+
+  .post-details p {
+  font-size: 14px;
+  }     
+  
+  .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio (change as needed) */
+      padding-top: 30px;
+      height: 0;
+      overflow: hidden;
+    }
+
+  .video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .button-style {
+    display: inline-block;
+    margin-right: 10px; /* Adjust as needed for spacing between buttons */
+    padding: 0 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #A9A9A9;
+    border: none;
+    border-radius: 5px;
+    height: 40px; /* Adjust the height as needed */
+    line-height: 40px; /* Match the height for vertical alignment */
+  }
+
+  /* Adjustments for button styles on hover, focus, etc. */
+  .button-style:hover,
+  .button-style:focus {
+    background-color: #555;
+    /* Additional styles for hover/focus state */
+  }
+
+  .edit-button {
+   padding-top: 10px;
+  }
+</style>
