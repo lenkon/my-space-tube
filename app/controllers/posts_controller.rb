@@ -16,6 +16,8 @@ class PostsController < ApplicationController
   end
 
   def download
+    set_post
+    send_data @post.video.download, filename: @post.video.filename.to_s 
   end
   
   # GET /posts/1/edit
