@@ -20,9 +20,9 @@
   <div class="overlay xl:text-align:left;  ">
     <div class="overlay-content">
       <h2 class="text-3xl post-details"><%= @post.title %></h2>
-      <%# <h2 class="text-2xl post-details"><%= @post.hits %>
+      <h2 class="text-2xl post-details"><%= @post.hits %> views </h2>
       <p class="post-details">
-       <%# Posted by <%= @post.user.full_name %> 
+       Posted by <%= @post.user.email %>
       </p>
     </div>
     <br>
@@ -89,6 +89,7 @@
   .button-container {
     display: flex;
     align-items: center;
+    padding-left: 12px;
   }
 
   .button-style {
