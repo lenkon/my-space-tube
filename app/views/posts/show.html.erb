@@ -1,25 +1,21 @@
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
 <div class="grid lg:grid-cols-2 grid-cols-1 mt-4 px-4">
-<div class="youtube-layout">
-  <% if @post.video.attached? %>
-    <div class="video-container">
-      <video controls>
-        <source src="<%= url_for(@post.video) %>" type="video/mp4">
-        
-        Your browser does not support the video tag.
-        
-      </video>
-      
-    </div>
-            <h2 class="text-1xl post-details">        Uploaded <%= time_ago_in_words(@post.created_at) %> ago</h2>
-  <% else %>
-
-    <% if @post.image.attached? %>
-      <%= image_tag(@post.image, class: "thumbnail") %>
+  <div class="youtube-layout">
+    <% if @post.video.attached? %>
+      <div class="video-container">
+        <video controls>
+          <source src="<%= url_for(@post.video) %>" type="video/mp4">          
+          Your browser does not support the video tag.          
+        </video>        
+      </div>
+      <h2 class="text-1xl post-details"> Uploaded <%= time_ago_in_words(@post.created_at) %> ago</h2>
+    <% else %>
+      <% if @post.image.attached? %>
+        <%= image_tag(@post.image, class: "thumbnail") %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
   <div class="overlay xl:text-align:left;  ">
     <div class="overlay-content">
@@ -40,17 +36,11 @@
       <%= link_to 'Download', download_post_path(@post), class: " font-medium button-style" %>
       
     <% end %>
-    <% if current_user %>
-
-  
-      <%# <%if @post.user_id == current_user.id %> 
-
-      
-            <%= link_to image_tag("edit.svg", style:"height: 20px;"), edit_post_path(@post), class: " inline-block button-style edit-button" %>
-
+    <% if current_user %>  
+      <% if @post.user_id == current_user.id %>       
+          <%= link_to image_tag("edit.svg", style:"height: 20px;"), edit_post_path(@post), class: " inline-block button-style edit-button" %>
           <%= button_to image_tag("delete.svg", style:"height: 20px;"), post_path(@post), method: :delete, class: " font-medium button-style" %>
-
-      <%# <% end %> 
+      <% end %> 
     <% end %>
   </div>
 
