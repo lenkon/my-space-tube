@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'likes/create'
-  get 'likes/destroy'
-  get 'likes/like_params'
-  get 'pages/media'
+  resources :likes, only: [:create, :destroy]
   devise_for :users
   resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
