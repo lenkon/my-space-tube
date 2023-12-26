@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/destroy'
+  get 'likes/like_params'
   get 'pages/media'
   devise_for :users
   resources :posts
