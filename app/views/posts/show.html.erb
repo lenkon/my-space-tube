@@ -28,10 +28,21 @@
     <br>
   <div class="button-container">
     <% if @post.video.attached? || @post.image.attached? %>
-      <%= link_to 'Download', download_post_path(@post), class: " font-medium button-style" %>
-      
+      <%= link_to 'Download', download_post_path(@post), class: " font-medium button-style" %>      
     <% end %>
-    <% if current_user %>        
+    <% if current_user %> 
+      <%# <%= button_to "like", likes_path, params: {like: {post_id: @post.id}}, method: :post %>    
+      <%# <% @post.likes.count %>  
+
+      <% if current_user.likes?(@post) %>
+        <% unlike_button = button_to image_tag("heart-icon.svg", style:"height: 20px;"), like_path(@post.likes.find_by(user_id: current_user)), method: :delete, class:" inline-block font-medium button-style" %>
+        <%= unlike_button %>
+      <% else %>
+        <% like_button = button_to image_tag("heart.svg", style:"height: 20px;"), likes_path, params: { like: { post_id: @post.id } }, method: :post, class:" inline-block font-medium button-style" %>
+        <%= like_button %>
+      <% end %>
+      <h2 class="text-1xl post-details"> Likes: <%= @post.likes.count %> </h2> 
+
       <% if @post.user_id == current_user.id %>       
           <%= link_to image_tag("edit.svg", style:"height: 20px;"), edit_post_path(@post), class: " inline-block button-style edit-button" %>
           <%= button_to image_tag("delete.svg", style:"height: 20px;"), post_path(@post), method: :delete, class: " font-medium button-style" %>

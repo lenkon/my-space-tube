@@ -6,4 +6,6 @@ class Post < ApplicationRecord
 
   acts_as_punchable
   belongs_to :user
+
+  has_many :likes
 end
